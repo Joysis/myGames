@@ -1,1 +1,254 @@
-Hello MyGame World
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <style>
+            body {
+                text-align: center;
+            }
+            #id-div-container {
+                width: auto;
+                height: auto;
+                display: inline-block;
+                /*vertical-align: middle;*/
+            }
+            #id-div-mine-head {
+                height: 60px;
+                background-color: #4a752c;
+            }
+            .head-content {
+                /*width: 80%;*/
+                height: 40px;
+                padding: 10px 20px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            .head-item {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            #id-select-level {
+                font: 700 16px Arial;
+                width: 100px;
+                height: 35px;
+                line-height: 35px;
+                border: none;
+                border-radius: 10px;
+            }
+
+            .head-item .center {
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                margin-right: 15px;
+            }
+            .head-item .center img {
+                width: 35px;
+                height: 35px;
+                margin-right: 3px;
+            }
+            .head-item img {
+                width: 30px;
+                height: 30px;
+            }
+            .head-item .hide {
+                display: none;
+            }
+            .text-number {
+                color: #fff;
+            }
+
+            .clearfix {
+                clear: both;
+            }
+            .cell {
+                width: 50px;
+                height: 50px;
+                line-height: 50px;
+                text-align: center;
+                float: left;
+                font-size: 0;
+            }
+            .cell[data-color="light"] {
+                background: #aad751;
+            }
+            .cell[data-color="dark"] {
+                background: #a2d149;
+            }
+            .row .showFlag {
+                background-image: url('images/flag.png');
+                background-size: 70%;
+                backgrond-color: transparent;
+                background-repeat: no-repeat;
+                background-position: center;
+            }
+            .opend {
+                font-size: 40px;
+            }
+            .opend[data-color="light"]{
+                background: #e5c29f;
+            }
+            .opend[data-color="dark"] {
+                background: #d7b899;
+            }
+            .opend[data-number='0'] {
+                font-size: 0;
+            }
+            .opend[data-number='1'] {
+                color: blue;
+            }
+            .opend[data-number='2'] {
+                color: green;
+            }
+            .opend[data-number='3'] {
+                color: purple;
+            }
+            .opend[data-number='4'] {
+                color: red;
+            }
+            .opend[data-number='9'] {
+                font-size: 0;
+                background-image: url('images/mine.png');
+                background-size: 70%;
+                backgrond-color: transparent;
+                background-repeat: no-repeat;
+                background-position: center;
+            }
+
+            /* 水平垂直居中公共类 */
+            .center-xy:before,.center-self-xy {
+                position: absolute;
+                left: 50%;
+                top: 30%;
+                -webkit-transform:translate(-50%,-30%);
+                transform:translate(-50%,-30%);
+            }
+            .modal {
+                width: 100%;
+                height: 100%;
+                position: fixed;
+                left: 0;
+                top: 0;
+                background-color: rgba(0,0,0,.5);
+                z-index: 9999;
+                display: none;
+            }
+            .show {
+                display: block;
+            }
+            .modal-info {
+                width: 400px;
+                height: 160px;
+                background-color: #4dc1f9;
+                border-radius: 10px;
+                /*padding:10px;*/
+                box-sizing:border-box;
+            }
+            .modal-t {
+                /*height: 90px;*/
+                text-align: center;
+                position: relative;
+            }
+            .modal-t p {
+                width: 100%;
+            }
+            .modal-b {
+                /*border-top: 1px solid #ccc;*/
+                padding-top: 20px;
+            }
+            .modal button {
+                width: 100%;
+                height: 60px;
+                border-radius: 10px;
+            }
+            .modal button.sure{
+                background-color: #4a752c;
+                color: #fff;
+                border: none
+            }
+            .modal-info-text .fail-img {
+                transform: scale(1.5)
+            }
+            @keyframes mYBounceInDown {
+                from, 60%, 75%, 90%, to {
+                    animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+                }
+
+                0% {
+                    opacity: 0;
+                    transform: translate3d(-50%, -3000px, 0);
+                }
+
+                60% {
+                    opacity: 1;
+                    transform: translate3d(-50%, -30%, 0);
+                }
+
+                75% {
+                    transform: translate3d(-50%, -60%, 0);
+                }
+
+                90% {
+                    transform: translate3d(-50%, -45%, 0);
+                }
+
+                to {
+                    transform: translate3d(-50%, -50%, 0);
+                }
+            }
+
+            .mYBounceInDown {
+                animation: mYBounceInDown ease 1s forwards;
+            }
+
+        </style>
+    </head>
+    <body>
+    <div id="id-div-container">
+        <div id="id-div-mine-head">
+            <div class="head-content">
+                <div class="head-item">
+                    <select name="select" id="id-select-level">
+                        <option value="low" selected>低难度</option>
+                        <option value="middle">中等难度</option>
+                        <option value="high">高难度</option>
+                    </select>
+                </div>
+                <div class="head-item">
+                    <div class="center mine-num">
+                        <div><img src="images/flag.png" alt="mineNum"></div>
+                        <div id="id-div-mine-nums" class="text-number"></div>
+                    </div>
+                    <div class="center clock">
+                        <div><img src="images/clock.png" alt="clock"></div>
+                        <div id="id-div-timer" class="text-number">00:00</div>
+                    </div>
+                </div>
+                <div class="head-item">
+                    <img src="images/voice.png" alt="voice" class="img-voice">
+                    <img src="images/voiceNone.png" alt="voice-none" class="img-voice hide">
+                </div>
+            </div>
+        </div>
+        <div id="id-div-mime">
+        </div>
+        <section class="modal">
+            <div class="modal-info center-self-xy mYBounceInDown">
+                <div class="modal-t">
+                    <p class="center-self-xy">
+                    <div class="modal-info-text"></div>
+                    </p>
+                </div>
+                <div class="modal-b clearfix">
+                    <!--                    <button class="modal-btn fl cancel">下次再玩</button>-->
+                    <button class="modal-btn fr sure">再玩一次</button>
+                </div>
+            </div>
+        </section>
+    </div>
+    <script src="./index.js"></script>
+    </body>
+</html>
