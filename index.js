@@ -49,7 +49,7 @@ const level_config = {
         mines: 40,
     },
     high: {
-        rows: 24,
+        rows: 18,
         cols: 24,
         mines: 99,
     }
