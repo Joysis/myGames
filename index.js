@@ -39,9 +39,9 @@ const mine_cell = 9
 
 const level_config = {
     low: {
-        rows: 8,
-        cols: 8,
-        mines: 8,
+        rows: 10,
+        cols: 10,
+        mines: 10,
     },
     middle: {
         rows: 16,
