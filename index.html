@@ -11,6 +11,7 @@
                 width: auto;
                 height: auto;
                 display: inline-block;
+                position: relative;
                 /*vertical-align: middle;*/
             }
             #id-div-mine-head {
@@ -122,17 +123,18 @@
             .center-xy:before,.center-self-xy {
                 position: absolute;
                 left: 50%;
-                top: 30%;
+                top: 45%;
                 -webkit-transform:translate(-50%,-30%);
                 transform:translate(-50%,-30%);
             }
             .modal {
-                width: 100%;
-                height: 100%;
-                position: fixed;
+                width: calc(100%);
+                height: calc(100%);
+                /*position: fixed;*/
+                position: absolute;
                 left: 0;
                 top: 0;
-                background-color: rgba(0,0,0,.5);
+                background-color: rgba(0,0,0,0.8);
                 z-index: 9999;
                 display: none;
             }
@@ -170,7 +172,8 @@
                 border: none
             }
             .modal-info-text .fail-img {
-                transform: scale(1.5)
+                /*perspective(1px) 防止纯粹scale模糊*/
+                transform: perspective(1px) scale(1.5);
             }
             @keyframes mYBounceInDown {
                 from, 60%, 75%, 90%, to {
@@ -230,6 +233,7 @@
                 <div class="head-item">
                     <img src="images/voice.png" alt="voice" class="img-voice">
                     <img src="images/voiceNone.png" alt="voice-none" class="img-voice hide">
+                    <img src="images/cancel.png" alt="cancel">
                 </div>
             </div>
         </div>
